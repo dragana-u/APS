@@ -1,16 +1,9 @@
-package PrvKolokvium.vlezna.PrvTermin;
+package APSKniga.razdeliMinMax;
 
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
- class SLLNode<E> {
-    protected E element;
-    protected SLLNode<E> succ;
-
-    public SLLNode(E elem, SLLNode<E> succ) {
-        this.element = elem;
-        this.succ = succ;
-    }
-}
 class SLL<E> {
     private SLLNode<E> first;
 
@@ -188,46 +181,56 @@ class SLL<E> {
         }
     }
 }
+ class SLLNode<E> {
+    protected E element;
+    protected SLLNode<E> succ;
 
+    public SLLNode(E elem, SLLNode<E> succ) {
+        this.element = elem;
+        this.succ = succ;
+    }
+}
+public class MinMaxLists {
 
-public class MakeZigZag {
-
-    //TODO: implement function
-    public static void makeZigZag(SLL<Integer> list) {
-        SLLNode<Integer> tmp = list.getFirst();
-        while (tmp != null) {
-            if(tmp.element==0){
-                list.delete(tmp);
-                tmp = tmp.succ;
-                continue;
-            }else if(tmp.succ!=null){
-                if(tmp.element<0 && tmp.succ.element<0){
-                    int o = Math.abs(tmp.element);
-                    list.insertAfter(o,tmp);
-                }else if(tmp.element>0 && tmp.succ.element>0){
-                    list.delete(tmp.succ);
-                    continue;
-                }
+    private static void minMax(SLL<Integer> list) {
+        SLLNode<Integer> first = list.getFirst();
+        int min = first.element;
+        int max = first.element;
+        SLL<Integer> maxList = new SLL<>();
+        SLL<Integer> minList = new SLL<>();
+        while(first!=null){
+            if(first.element>max){
+                max = first.element;
             }
-            tmp = tmp.succ;
+            if(first.element<min){
+                min = first.element;
+            }
+            first = first.succ;
         }
+        first = list.getFirst();
+        while(first!=null){
+            int razlikaDoNajmal = Math.abs(min - first.element);
+            int razlikaDoNajgolem = Math.abs(max - first.element);
+            if(razlikaDoNajgolem < razlikaDoNajmal){
+                maxList.insertLast(first.element);
+            }else{
+                minList.insertLast(first.element);
+            }
+            first = first.succ;
+        }
+        System.out.println(minList);
+        System.out.println(maxList);
     }
 
-    public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
-
-        int n = input.nextInt();
-
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int size = Integer.parseInt(br.readLine());
+        String[] input = br.readLine().split("\\s+");
         SLL<Integer> list = new SLL<>();
-
-        for (int i = 0; i < n; i++) {
-            list.insertLast(input.nextInt());
+        for (String num : input) {
+            list.insertLast(Integer.parseInt(num));
         }
-
         System.out.println(list);
-
-        makeZigZag(list);
-
-        System.out.println(list);
+        minMax(list);
     }
 }

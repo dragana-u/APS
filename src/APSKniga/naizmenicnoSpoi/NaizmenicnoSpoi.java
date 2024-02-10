@@ -1,8 +1,11 @@
-package PrvKolokvium.vlezna.PrvTermin;
+package APSKniga.naizmenicnoSpoi;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Scanner;
 
- class SLLNode<E> {
+class SLLNode<E> {
     protected E element;
     protected SLLNode<E> succ;
 
@@ -187,47 +190,51 @@ class SLL<E> {
             first = newsucc;
         }
     }
+
 }
 
-
-public class MakeZigZag {
-
-    //TODO: implement function
-    public static void makeZigZag(SLL<Integer> list) {
-        SLLNode<Integer> tmp = list.getFirst();
-        while (tmp != null) {
-            if(tmp.element==0){
-                list.delete(tmp);
-                tmp = tmp.succ;
-                continue;
-            }else if(tmp.succ!=null){
-                if(tmp.element<0 && tmp.succ.element<0){
-                    int o = Math.abs(tmp.element);
-                    list.insertAfter(o,tmp);
-                }else if(tmp.element>0 && tmp.succ.element>0){
-                    list.delete(tmp.succ);
-                    continue;
-                }
-            }
-            tmp = tmp.succ;
+public class NaizmenicnoSpoi {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int num1 = Integer.parseInt(br.readLine());
+        String[] parts = br.readLine().split("\\s+");
+        SLL<Integer> list1 = new SLL<>();
+        SLL<Integer> list2 = new SLL<>();
+        for(int i=0;i<num1;i++){
+            list1.insertLast(Integer.parseInt(parts[i]));
         }
+        int num2 = Integer.parseInt(br.readLine());
+        parts = br.readLine().split("\\s+");
+        for(int i=0;i<num2;i++){
+            list2.insertLast(Integer.parseInt(parts[i]));
+        }
+        merge(list1,list2);
     }
 
-    public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
-
-        int n = input.nextInt();
-
-        SLL<Integer> list = new SLL<>();
-
-        for (int i = 0; i < n; i++) {
-            list.insertLast(input.nextInt());
+    private static void merge(SLL<Integer> list1, SLL<Integer> list2) {
+        SLLNode<Integer> tmp1 = list1.getFirst();
+        SLLNode<Integer> tmp2 = list2.getFirst();
+        SLL<Integer> res = new SLL<>();
+        boolean list1Turn = true;
+        while(tmp1!=null || tmp2!=null){
+            if(list1Turn){
+                list1Turn=false;
+                int count=0;
+                while(tmp1!=null && count!=2){
+                    count++;
+                    res.insertLast(tmp1.element);
+                    tmp1 = tmp1.succ;
+                }
+            }else{
+                list1Turn = true;
+                int count=0;
+                while(tmp2!=null && count!=2){
+                    count++;
+                    res.insertLast(tmp2.element);
+                    tmp2 = tmp2.succ;
+                }
+            }
         }
-
-        System.out.println(list);
-
-        makeZigZag(list);
-
-        System.out.println(list);
+        System.out.println(res);
     }
 }
