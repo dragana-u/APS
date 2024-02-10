@@ -6,6 +6,6 @@
 
 Внимавајте:
 
-1. Даден е целосниот код на структурата којашто треба да се користи. Дадена е и тест класата SpecialSLLDelete.java, со целосно имплементиран input и output. Потребно е да се менува само во рамки на void specialDelete(SLL<Integer> list, int m) функцијата.
+1. Даден е целосниот код на структурата којашто треба да се користи. Дадена е и тест класата SpecialSLLDelete.java, со целосно имплементиран input и output. Потребно е да се менува само во рамки на void specialDelete(PrvKolokvium.vlezna.PrvKolokvium.vlezna.VtorTermin.SLL<Integer> list, int m) функцијата.
 
 2. Не смее да менувате во main функцијата !

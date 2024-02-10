@@ -10,6 +10,6 @@
 
 Внимавајте:
 
-1. Даден е целосниот код на структурата којашто треба да се користи. Дадена е и тест класата MysticalCardGame.java, со целосно имплементиран input и output. Потребно е да се менува само во рамки на void startDuel(SLL<Card> firstSorcererCards, SLL<Card> secondSorcererCards) функцијата.
+1. Даден е целосниот код на структурата којашто треба да се користи. Дадена е и тест класата MysticalCardGame.java, со целосно имплементиран input и output. Потребно е да се менува само во рамки на void startDuel(PrvKolokvium.vlezna.PrvKolokvium.vlezna.VtorTermin.SLL<Card> firstSorcererCards, PrvKolokvium.vlezna.PrvKolokvium.vlezna.VtorTermin.SLL<Card> secondSorcererCards) функцијата.
 
 2. Не смее да менувате во main функцијата !
